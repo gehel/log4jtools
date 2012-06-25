@@ -32,4 +32,17 @@ public class CategorizationFilterTest {
 				(Throwable) null);
 		assertTrue(filter.match(event));
 	}
+
+	@Test
+	public void matchMessage() {
+		CategorizationFilter filter = new CategorizationFilter("",
+				(String) null, Level.INFO, Pattern.compile(
+						"First line of each file following a roll.*",
+						Pattern.DOTALL), (Pattern) null, "category",
+				"bugTrackerRef");
+		LoggingEvent event = new LoggingEvent("",
+				Logger.getLogger("loggerName"), 0, Level.INFO,
+				"First line of each file following a roll\n", (Throwable) null);
+		assertTrue(filter.match(event));
+	}
 }

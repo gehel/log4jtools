@@ -52,7 +52,7 @@ public class ConfigReader {
 		if (cell == null || cell.equals("")) {
 			return null;
 		}
-		return Pattern.compile(cell);
+		return Pattern.compile(cell, Pattern.DOTALL);
 	}
 
 	private String readCell(Row row, int cellnum) {
@@ -60,7 +60,7 @@ public class ConfigReader {
 			return null;
 		}
 		Cell cell = row.getCell(cellnum);
-		return cell == null ? (String) null : cell.getStringCellValue();
+		return cell == null ? (String) null : cell.getStringCellValue().trim();
 	}
 
 }

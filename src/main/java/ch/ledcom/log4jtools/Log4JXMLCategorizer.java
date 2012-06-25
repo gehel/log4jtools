@@ -2,10 +2,11 @@ package ch.ledcom.log4jtools;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,91 +19,86 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.xml.XMLLayout;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
-
 import ch.ledcom.log4jtools.config.ConfigReader;
 import ch.ledcom.log4jtools.filter.CategorizationFilter;
 import ch.ledcom.log4jtools.processor.CategorizingProcessor;
 import ch.ledcom.log4jtools.processor.LogProcessor;
-import ch.ledcom.log4jtools.utils.FilenameComparator;
+
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.converters.FileConverter;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.io.Closeables;
 
 public class Log4JXMLCategorizer {
 
-	private final LogFileXMLReader logReader;
-
-	public Log4JXMLCategorizer(LogFileXMLReader logReader) {
-		this.logReader = logReader;
-	}
-
-	private void processLogDirectory(File directory, String host, String path)
-			throws IOException {
-		if (!directory.exists() || !directory.isDirectory()) {
-			throw new IllegalArgumentException(
-					"Given argument is not a directory : "
-							+ directory.getAbsolutePath());
-		}
-		System.out.println("processing directory : "
-				+ directory.getAbsolutePath());
-		File[] children = directory.listFiles(new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return pathname.isFile()
-						&& pathname.getAbsolutePath().contains("xml");
-			}
-		});
-
-		// sort files to process them by date
-		Arrays.sort(children, new FilenameComparator());
-
-		// process logs
-		for (File child : children) {
-			System.out.println("processing : " + child.getAbsolutePath());
-			processLog(child, host, path);
-		}
-	}
-
-	private void processLog(File xmlLogFile, String host, String path)
-			throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(xmlLogFile));
-		this.logReader.process(reader, host, path);
-	}
-
 	public static void main(String[] args) throws IOException,
 			InvalidFormatException {
-		File baseLogDirectory = new File(args[0]);
-		String env = args[1];
-		String serversArg = args[2];
 
-		System.out.println("env : " + env);
-		System.out.println("servers : " + serversArg);
+		JCOptions options = new JCOptions();
+		new JCommander(options, args);
 
-		String[] servers = serversArg.split(",");
-
-		File envDirectory = new File(baseLogDirectory, env);
-
-		ConfigReader configReader = new ConfigReader();
-		InputStream in = LogFileXMLReader.class.getClassLoader()
-				.getResourceAsStream("categorization.xls");
-		List<CategorizationFilter> filters = configReader.loadConfig(in);
-
-		for (CategorizationFilter filter : filters) {
-			System.out.println(filter);
-		}
+		List<CategorizationFilter> filters = readConfig(options.getConfigFile());
 
 		CategorizingProcessor processor = new CategorizingProcessor(filters,
-				initAppenders(new File("/home/glederre/logs"), filters));
+				initAppenders(options.getOutputDirectory(), filters));
 
 		List<LogProcessor> processors = new ArrayList<LogProcessor>();
 		processors.add(processor);
 
-		Log4JXMLCategorizer categorizer = new Log4JXMLCategorizer(
-				new LogFileXMLReader(processors));
+		LogFileXMLReader reader = new LogFileXMLReader(processors);
 
-		for (String server : servers) {
-			File logDirectory = new File(envDirectory, server);
-			categorizer.processLogDirectory(logDirectory, server, env);
+		if (options.getInputFiles().size() == 0) {
+			reader.process(
+					new BufferedReader(new InputStreamReader(System.in)),
+					options.getHost(), options.getApplication());
+		} else {
+			for (File f : getLogFiles(options.getInputFiles())) {
+				BufferedReader in = new BufferedReader(new FileReader(f));
+				try {
+					reader.process(in, options.getHost(),
+							options.getApplication());
+				} finally {
+					Closeables.closeQuietly(in);
+				}
+			}
 		}
+	}
+
+	private static List<File> getLogFiles(List<File> files) {
+		List<File> result = new ArrayList<File>();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				result.addAll(getLogFiles(file.listFiles()));
+			} else {
+				result.add(file);
+			}
+		}
+		return result;
+	}
+	
+	private static List<File> getLogFiles(File[] files) {
+		return getLogFiles(Arrays.asList(files));
+	}
+	
+	private static List<CategorizationFilter> readConfig(File configFile)
+			throws InvalidFormatException, IOException {
+
+		ConfigReader configReader = new ConfigReader();
+
+		InputStream in = new FileInputStream(configFile);
+		List<CategorizationFilter> filters;
+		try {
+			filters = configReader.loadConfig(in);
+		} finally {
+			Closeables.closeQuietly(in);
+		}
+		for (CategorizationFilter filter : filters) {
+			System.out.println(filter);
+		}
+
+		return filters;
 	}
 
 	private static Map<String, Appender> initAppenders(File baseOutputDir,
@@ -129,6 +125,44 @@ public class Log4JXMLCategorizer {
 		}
 
 		return ImmutableMap.copyOf(result);
+	}
+
+	private static final class JCOptions {
+		@Parameter(description = "files to parse", converter = FileConverter.class, required = true)
+		private List<File> inputFiles;
+
+		@Parameter(names = "-o", converter = FileConverter.class, required = true)
+		private File outputDirectory;
+
+		@Parameter(names = { "-c", "-config" }, converter = FileConverter.class, required = true)
+		private File configFile;
+
+		@Parameter(names = "-host", required = true)
+		private String host;
+
+		@Parameter(names = "-application", required = true)
+		private String application;
+
+		public List<File> getInputFiles() {
+			return inputFiles;
+		}
+
+		public File getOutputDirectory() {
+			return outputDirectory;
+		}
+
+		public File getConfigFile() {
+			return configFile;
+		}
+
+		public String getHost() {
+			return host;
+		}
+
+		public String getApplication() {
+			return application;
+		}
+
 	}
 
 }
