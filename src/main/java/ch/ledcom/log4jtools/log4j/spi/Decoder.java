@@ -202,32 +202,48 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package ch.ledcom.log4jtools;
-
-import java.io.IOException;
+package ch.ledcom.log4jtools.log4j.spi;
 
 import org.apache.log4j.spi.LoggingEvent;
 
-public class Report {
+import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
+import java.util.Vector;
 
-	private final String description;
+/**
+ *  Allow LoggingEvents to be reconstructed from a different format
+ * (usually XML).
+ *
+ *  @author Scott Deboy (sdeboy@apache.org)
+ *  @since 1.3
+ */
+public interface Decoder {
+    /**
+     * Decode events from document.
+     * @param document document to decode.
+     * @return list of LoggingEvent instances.
+     */
+    Vector decodeEvents(String document);
 
-	private int occurences = 0;
+    /**
+     * Decode event from string.
+     * @param event string representation of event
+     * @return event
+     */
+    LoggingEvent decode(String event);
 
-	public Report(String description) {
-		this.description = description;
-	}
+    /**
+     * Decode event from document retreived from URL.
+     * @param url url of document
+     * @return list of LoggingEvent instances.
+     * @throws IOException if IO error resolving document.
+     */
+    Vector decode(URL url) throws IOException;
 
-	public void accumulateEvent(LoggingEvent event) throws IOException {
-		this.occurences++;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public int getOccurences() {
-		return this.occurences;
-	}
-
+    /**
+     * Sets additional properties.
+     * @param additionalProperties map of additional properties.
+     */
+    void setAdditionalProperties(Map additionalProperties);
 }

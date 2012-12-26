@@ -3,10 +3,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ch.ledcom</groupId>
+        <artifactId>ledcom-parent-pom</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>ch.ledcom.log4jtools</groupId>
     <artifactId>log4jtools</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Log Categorizer</name>
     <description>Categorize Log4j XML log files</description>
+
     <build>
         <plugins>
             <plugin>
@@ -37,6 +46,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>.idea/**</exclude>
+                        <exclude>target/**</exclude>
+                        <exclude>main/src/java/ch/ledcom/log4jtools/log4j/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -50,12 +70,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>apache-log4j-receivers</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
@@ -93,5 +107,4 @@
             <version>1.25</version>
         </dependency>
     </dependencies>
-    <groupId>ch.ledcom.log4jtools</groupId>
 </project>
