@@ -89,13 +89,6 @@
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>.idea/**</exclude>
-                        <exclude>target/**</exclude>
-                        <exclude>src/main/java/ch/ledcom/log4jtools/log4j/**</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
