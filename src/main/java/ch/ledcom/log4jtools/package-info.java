@@ -11,12 +11,4 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-package ch.ledcom.log4jtools.processor;
-
-import java.io.IOException;
-
-import org.apache.log4j.spi.LoggingEvent;
-
-public interface LogProcessor {
-	void process(LoggingEvent event) throws IOException;
-}
+package ch.ledcom.log4jtools;
