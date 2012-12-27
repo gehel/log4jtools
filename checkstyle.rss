@@ -8,8 +8,8 @@
     <language>en-us</language>
     <copyright>&#169;2012 LedCom</copyright>
     <item>
-      <title>File: 14,
-             Errors: 770,
+      <title>File: 15,
+             Errors: 1235,
              Warnings: 0,
              Infos: 0
       </title>
@@ -38,7 +38,7 @@
                   0
                 </td>
                 <td>
-                  27
+                  466
                 </td>
               </tr>
                           <tr>
@@ -52,7 +52,7 @@
                   0
                 </td>
                 <td>
-                  58
+                  55
                 </td>
               </tr>
                           <tr>
@@ -66,7 +66,7 @@
                   0
                 </td>
                 <td>
-                  54
+                  56
                 </td>
               </tr>
                           <tr>
@@ -80,7 +80,7 @@
                   0
                 </td>
                 <td>
-                  18
+                  14
                 </td>
               </tr>
                           <tr>
@@ -94,7 +94,7 @@
                   0
                 </td>
                 <td>
-                  31
+                  30
                 </td>
               </tr>
                           <tr>
@@ -127,20 +127,6 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.Log4JXMLCategorizer.java">ch/ledcom/log4jtools/Log4JXMLCategorizer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  144
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.utils.FilenameComparator.java">ch/ledcom/log4jtools/utils/FilenameComparator.java</a>
                 </td>
                 <td>
@@ -155,6 +141,20 @@
               </tr>
                           <tr>
                 <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.Log4JXMLCategorizer.java">ch/ledcom/log4jtools/Log4JXMLCategorizer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  140
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.config.ConfigReader.java">ch/ledcom/log4jtools/config/ConfigReader.java</a>
                 </td>
                 <td>
@@ -164,7 +164,7 @@
                   0
                 </td>
                 <td>
-                  64
+                  62
                 </td>
               </tr>
                           <tr>
@@ -220,7 +220,21 @@
                   0
                 </td>
                 <td>
-                  1
+                  39
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.package-info.java">ch/ledcom/log4jtools/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                       </tbody>

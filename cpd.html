@@ -98,24 +98,24 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>CPD Results<a name="CPD_Results"></a></h2><p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 4.3.</p></div><div class="section"><h2>Duplications<a name="Duplications"></a></h2><table border="0" class="bodyTable"><tr class="a"><th>File</th><th>Line</th></tr><tr class="b"><td>ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java</td><td><a href="./xref/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html#348">348</a></td></tr><tr class="a"><td>ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java</td><td><a href="./xref/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html#386">386</a></td></tr><tr class="b"><td colspan='2'><div><pre>                    NodeList propertyList = list.item(y).getChildNodes();
-                    int propertyLength = propertyList.getLength();
+        <div class="section"><h2>CPD Results<a name="CPD_Results"></a></h2><p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 4.3.</p></div><div class="section"><h2>Duplications<a name="Duplications"></a></h2><table border="0" class="bodyTable"><tr class="a"><th>File</th><th>Line</th></tr><tr class="b"><td>ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java</td><td><a href="./xref/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html#362">362</a></td></tr><tr class="a"><td>ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java</td><td><a href="./xref/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html#398">398</a></td></tr><tr class="b"><td colspan='2'><div><pre>					NodeList propertyList = list.item(y).getChildNodes();
+					int propertyLength = propertyList.getLength();
 
-                    for (int i = 0; i &lt; propertyLength; i++) {
-                        String propertyTag = propertyList.item(i).getNodeName();
+					for (int i = 0; i &lt; propertyLength; i++) {
+						String propertyTag = propertyList.item(i).getNodeName();
 
-                        if (propertyTag.equalsIgnoreCase(&quot;log4j:data&quot;)) {
-                            Node property = propertyList.item(i);
-                            String name =
-                                    property.getAttributes().getNamedItem(&quot;name&quot;).getNodeValue();
-                            String value =
-                                    property.getAttributes().getNamedItem(&quot;value&quot;).getNodeValue();
-                            properties.put(name, value);
-                        }
-                    }
-                }
+						if (propertyTag.equalsIgnoreCase(&quot;log4j:data&quot;)) {
+							Node property = propertyList.item(i);
+							String name = property.getAttributes()
+									.getNamedItem(&quot;name&quot;).getNodeValue();
+							String value = property.getAttributes()
+									.getNamedItem(&quot;value&quot;).getNodeValue();
+							properties.put(name, value);
+						}
+					}
+				}
 
-                if (tagName.equalsIgnoreCase(&quot;log4j:throwable&quot;)) {</pre></div></td></tr></table></div>
+				if (tagName.equalsIgnoreCase(&quot;log4j:throwable&quot;)) {</pre></div></td></tr></table></div>
       </div>
     </div>
     <div class="clear">
