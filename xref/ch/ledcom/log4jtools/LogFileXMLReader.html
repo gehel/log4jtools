@@ -38,49 +38,49 @@
 <a class="jxr_linenumber" name="28" href="#28">28</a>  
 <a class="jxr_linenumber" name="29" href="#29">29</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../ch/ledcom/log4jtools/LogFileXMLReader.html">LogFileXMLReader</a> {
 <a class="jxr_linenumber" name="30" href="#30">30</a>  
-<a class="jxr_linenumber" name="31" href="#31">31</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../ch/ledcom/log4jtools/log4j/spi/Decoder.html">Decoder</a> decoder;
+<a class="jxr_linenumber" name="31" href="#31">31</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../ch/ledcom/log4jtools/log4j/spi/Decoder.html">Decoder</a> decoder;
 <a class="jxr_linenumber" name="32" href="#32">32</a>  
-<a class="jxr_linenumber" name="33" href="#33">33</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> List&lt;LogProcessor&gt; logProcessors;
+<a class="jxr_linenumber" name="33" href="#33">33</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> List&lt;LogProcessor&gt; logProcessors;
 <a class="jxr_linenumber" name="34" href="#34">34</a>  
-<a class="jxr_linenumber" name="35" href="#35">35</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String HOSTNAME_KEY = <span class="jxr_string">"hostname"</span>;
-<a class="jxr_linenumber" name="36" href="#36">36</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String APPLICATION_KEY = <span class="jxr_string">"application"</span>;
+<a class="jxr_linenumber" name="35" href="#35">35</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String HOSTNAME_KEY = <span class="jxr_string">"hostname"</span>;
+<a class="jxr_linenumber" name="36" href="#36">36</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String APPLICATION_KEY = <span class="jxr_string">"application"</span>;
 <a class="jxr_linenumber" name="37" href="#37">37</a>  
-<a class="jxr_linenumber" name="38" href="#38">38</a>  	<strong class="jxr_keyword">public</strong> <a href="../../../ch/ledcom/log4jtools/LogFileXMLReader.html">LogFileXMLReader</a>(List&lt;LogProcessor&gt; logProcessors)
-<a class="jxr_linenumber" name="39" href="#39">39</a>  			<strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="40" href="#40">40</a>  		<strong class="jxr_keyword">this</strong>.decoder = <strong class="jxr_keyword">new</strong> <a href="../../../ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html">XMLDecoder</a>();
-<a class="jxr_linenumber" name="41" href="#41">41</a>  		<strong class="jxr_keyword">this</strong>.logProcessors = ImmutableList.copyOf(logProcessors);
-<a class="jxr_linenumber" name="42" href="#42">42</a>  	}
+<a class="jxr_linenumber" name="38" href="#38">38</a>      <strong class="jxr_keyword">public</strong> <a href="../../../ch/ledcom/log4jtools/LogFileXMLReader.html">LogFileXMLReader</a>(List&lt;LogProcessor&gt; logProcessors)
+<a class="jxr_linenumber" name="39" href="#39">39</a>              <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="40" href="#40">40</a>          <strong class="jxr_keyword">this</strong>.decoder = <strong class="jxr_keyword">new</strong> <a href="../../../ch/ledcom/log4jtools/log4j/xml/XMLDecoder.html">XMLDecoder</a>();
+<a class="jxr_linenumber" name="41" href="#41">41</a>          <strong class="jxr_keyword">this</strong>.logProcessors = ImmutableList.copyOf(logProcessors);
+<a class="jxr_linenumber" name="42" href="#42">42</a>      }
 <a class="jxr_linenumber" name="43" href="#43">43</a>  
-<a class="jxr_linenumber" name="44" href="#44">44</a>  	@SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
-<a class="jxr_linenumber" name="45" href="#45">45</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> process(BufferedReader reader, String host, String path)
-<a class="jxr_linenumber" name="46" href="#46">46</a>  			<strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="47" href="#47">47</a>  		<strong class="jxr_keyword">char</strong>[] content = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">char</strong>[10000];
-<a class="jxr_linenumber" name="48" href="#48">48</a>  		<strong class="jxr_keyword">int</strong> length = 0;
-<a class="jxr_linenumber" name="49" href="#49">49</a>  		<strong class="jxr_keyword">while</strong> ((length = reader.read(content)) &gt; -1) {
-<a class="jxr_linenumber" name="50" href="#50">50</a>  			processEvents(
-<a class="jxr_linenumber" name="51" href="#51">51</a>  					decoder.decodeEvents(String.valueOf(content, 0, length)),
-<a class="jxr_linenumber" name="52" href="#52">52</a>  					host, path);
-<a class="jxr_linenumber" name="53" href="#53">53</a>  		}
-<a class="jxr_linenumber" name="54" href="#54">54</a>  	}
+<a class="jxr_linenumber" name="44" href="#44">44</a>      @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
+<a class="jxr_linenumber" name="45" href="#45">45</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> process(BufferedReader reader, String host, String path)
+<a class="jxr_linenumber" name="46" href="#46">46</a>              <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="47" href="#47">47</a>          <strong class="jxr_keyword">char</strong>[] content = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">char</strong>[10000];
+<a class="jxr_linenumber" name="48" href="#48">48</a>          <strong class="jxr_keyword">int</strong> length = 0;
+<a class="jxr_linenumber" name="49" href="#49">49</a>          <strong class="jxr_keyword">while</strong> ((length = reader.read(content)) &gt; -1) {
+<a class="jxr_linenumber" name="50" href="#50">50</a>              processEvents(
+<a class="jxr_linenumber" name="51" href="#51">51</a>                      decoder.decodeEvents(String.valueOf(content, 0, length)),
+<a class="jxr_linenumber" name="52" href="#52">52</a>                      host, path);
+<a class="jxr_linenumber" name="53" href="#53">53</a>          }
+<a class="jxr_linenumber" name="54" href="#54">54</a>      }
 <a class="jxr_linenumber" name="55" href="#55">55</a>  
-<a class="jxr_linenumber" name="56" href="#56">56</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processEvents(Collection&lt;LoggingEvent&gt; c, String host,
-<a class="jxr_linenumber" name="57" href="#57">57</a>  			String application) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="58" href="#58">58</a>  		<strong class="jxr_keyword">if</strong> (c == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="59" href="#59">59</a>  			<strong class="jxr_keyword">return</strong>;
-<a class="jxr_linenumber" name="60" href="#60">60</a>  		}
-<a class="jxr_linenumber" name="61" href="#61">61</a>  		<strong class="jxr_keyword">for</strong> (LoggingEvent evt : c) {
-<a class="jxr_linenumber" name="62" href="#62">62</a>  			<strong class="jxr_keyword">if</strong> (evt.getProperty(HOSTNAME_KEY) == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="63" href="#63">63</a>  				evt.setProperty(HOSTNAME_KEY, host);
-<a class="jxr_linenumber" name="64" href="#64">64</a>  			}
-<a class="jxr_linenumber" name="65" href="#65">65</a>  			<strong class="jxr_keyword">if</strong> (evt.getProperty(APPLICATION_KEY) == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="66" href="#66">66</a>  				evt.setProperty(APPLICATION_KEY, application);
-<a class="jxr_linenumber" name="67" href="#67">67</a>  			}
+<a class="jxr_linenumber" name="56" href="#56">56</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processEvents(Collection&lt;LoggingEvent&gt; c, String host,
+<a class="jxr_linenumber" name="57" href="#57">57</a>              String application) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="58" href="#58">58</a>          <strong class="jxr_keyword">if</strong> (c == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="59" href="#59">59</a>              <strong class="jxr_keyword">return</strong>;
+<a class="jxr_linenumber" name="60" href="#60">60</a>          }
+<a class="jxr_linenumber" name="61" href="#61">61</a>          <strong class="jxr_keyword">for</strong> (LoggingEvent evt : c) {
+<a class="jxr_linenumber" name="62" href="#62">62</a>              <strong class="jxr_keyword">if</strong> (evt.getProperty(HOSTNAME_KEY) == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="63" href="#63">63</a>                  evt.setProperty(HOSTNAME_KEY, host);
+<a class="jxr_linenumber" name="64" href="#64">64</a>              }
+<a class="jxr_linenumber" name="65" href="#65">65</a>              <strong class="jxr_keyword">if</strong> (evt.getProperty(APPLICATION_KEY) == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="66" href="#66">66</a>                  evt.setProperty(APPLICATION_KEY, application);
+<a class="jxr_linenumber" name="67" href="#67">67</a>              }
 <a class="jxr_linenumber" name="68" href="#68">68</a>  
-<a class="jxr_linenumber" name="69" href="#69">69</a>  			<strong class="jxr_keyword">for</strong> (LogProcessor processor : <strong class="jxr_keyword">this</strong>.logProcessors) {
-<a class="jxr_linenumber" name="70" href="#70">70</a>  				processor.process(evt);
-<a class="jxr_linenumber" name="71" href="#71">71</a>  			}
-<a class="jxr_linenumber" name="72" href="#72">72</a>  		}
-<a class="jxr_linenumber" name="73" href="#73">73</a>  	}
+<a class="jxr_linenumber" name="69" href="#69">69</a>              <strong class="jxr_keyword">for</strong> (LogProcessor processor : <strong class="jxr_keyword">this</strong>.logProcessors) {
+<a class="jxr_linenumber" name="70" href="#70">70</a>                  processor.process(evt);
+<a class="jxr_linenumber" name="71" href="#71">71</a>              }
+<a class="jxr_linenumber" name="72" href="#72">72</a>          }
+<a class="jxr_linenumber" name="73" href="#73">73</a>      }
 <a class="jxr_linenumber" name="74" href="#74">74</a>  
 <a class="jxr_linenumber" name="75" href="#75">75</a>  }
 </pre>

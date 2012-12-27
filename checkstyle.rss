@@ -9,7 +9,7 @@
     <copyright>&#169;2012 LedCom</copyright>
     <item>
       <title>File: 15,
-             Errors: 1235,
+             Errors: 244,
              Warnings: 0,
              Infos: 0
       </title>
@@ -38,7 +38,7 @@
                   0
                 </td>
                 <td>
-                  466
+                  28
                 </td>
               </tr>
                           <tr>
@@ -52,7 +52,7 @@
                   0
                 </td>
                 <td>
-                  55
+                  7
                 </td>
               </tr>
                           <tr>
@@ -66,7 +66,7 @@
                   0
                 </td>
                 <td>
-                  56
+                  18
                 </td>
               </tr>
                           <tr>
@@ -80,7 +80,7 @@
                   0
                 </td>
                 <td>
-                  14
+                  6
                 </td>
               </tr>
                           <tr>
@@ -94,21 +94,7 @@
                   0
                 </td>
                 <td>
-                  30
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.processor.GraphingProcessor.java">ch/ledcom/log4jtools/processor/GraphingProcessor.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  123
+                  10
                 </td>
               </tr>
                           <tr>
@@ -122,12 +108,12 @@
                   0
                 </td>
                 <td>
-                  69
+                  24
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.utils.FilenameComparator.java">ch/ledcom/log4jtools/utils/FilenameComparator.java</a>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.processor.GraphingProcessor.java">ch/ledcom/log4jtools/processor/GraphingProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -136,7 +122,7 @@
                   0
                 </td>
                 <td>
-                  15
+                  39
                 </td>
               </tr>
                           <tr>
@@ -150,7 +136,21 @@
                   0
                 </td>
                 <td>
-                  140
+                  28
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.utils.FilenameComparator.java">ch/ledcom/log4jtools/utils/FilenameComparator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
                 </td>
               </tr>
                           <tr>
@@ -164,7 +164,7 @@
                   0
                 </td>
                 <td>
-                  62
+                  18
                 </td>
               </tr>
                           <tr>
@@ -178,7 +178,7 @@
                   0
                 </td>
                 <td>
-                  27
+                  13
                 </td>
               </tr>
                           <tr>
@@ -192,7 +192,7 @@
                   0
                 </td>
                 <td>
-                  135
+                  42
                 </td>
               </tr>
                           <tr>
@@ -206,7 +206,7 @@
                   0
                 </td>
                 <td>
-                  4
+                  2
                 </td>
               </tr>
                           <tr>
@@ -220,7 +220,7 @@
                   0
                 </td>
                 <td>
-                  39
+                  6
                 </td>
               </tr>
                           <tr>
