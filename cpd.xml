@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="18" tokens="113">
+<file line="348" path="/scratch/jenkins/workspace/log4jtools-deploy/src/main/java/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java"/>
+<file line="386" path="/scratch/jenkins/workspace/log4jtools-deploy/src/main/java/ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java"/>
+<codefragment>
+<![CDATA[
+                    NodeList propertyList = list.item(y).getChildNodes();
+                    int propertyLength = propertyList.getLength();
+
+                    for (int i = 0; i < propertyLength; i++) {
+                        String propertyTag = propertyList.item(i).getNodeName();
+
+                        if (propertyTag.equalsIgnoreCase("log4j:data")) {
+                            Node property = propertyList.item(i);
+                            String name =
+                                    property.getAttributes().getNamedItem("name").getNodeValue();
+                            String value =
+                                    property.getAttributes().getNamedItem("value").getNodeValue();
+                            properties.put(name, value);
+                        }
+                    }
+                }
+
+                if (tagName.equalsIgnoreCase("log4j:throwable")) {
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>

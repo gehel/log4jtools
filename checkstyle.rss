@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>Log Categorizer - Checkstyle report</title>
+    <link>http://gehel.github.com/log4jtools/</link>
+    <description>Log Categorizer - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2012 LedCom</copyright>
+    <item>
+      <title>File: 14,
+             Errors: 770,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>http://gehel.github.com/log4jtools//checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://gehel.github.com/log4jtools//checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.log4j.xml.XMLDecoder.java">ch/ledcom/log4jtools/log4j/xml/XMLDecoder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  27
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.GraphLoggers.java">ch/ledcom/log4jtools/GraphLoggers.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  58
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.LogFileXMLReader.java">ch/ledcom/log4jtools/LogFileXMLReader.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  54
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.LoggerSetExtractor.java">ch/ledcom/log4jtools/LoggerSetExtractor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  18
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.utils.ParseUtils.java">ch/ledcom/log4jtools/utils/ParseUtils.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  31
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.processor.GraphingProcessor.java">ch/ledcom/log4jtools/processor/GraphingProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  123
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.processor.CategorizingProcessor.java">ch/ledcom/log4jtools/processor/CategorizingProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  69
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.Log4JXMLCategorizer.java">ch/ledcom/log4jtools/Log4JXMLCategorizer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  144
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.utils.FilenameComparator.java">ch/ledcom/log4jtools/utils/FilenameComparator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  15
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.config.ConfigReader.java">ch/ledcom/log4jtools/config/ConfigReader.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  64
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.Report.java">ch/ledcom/log4jtools/Report.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  27
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.filter.CategorizationFilter.java">ch/ledcom/log4jtools/filter/CategorizationFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  135
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.processor.LogProcessor.java">ch/ledcom/log4jtools/processor/LogProcessor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/log4jtools//checkstyle.html#ch.ledcom.log4jtools.log4j.spi.Decoder.java">ch/ledcom/log4jtools/log4j/spi/Decoder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

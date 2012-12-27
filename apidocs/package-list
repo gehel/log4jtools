@@ -1,0 +1,7 @@
+ch.ledcom.log4jtools
+ch.ledcom.log4jtools.config
+ch.ledcom.log4jtools.filter
+ch.ledcom.log4jtools.log4j.spi
+ch.ledcom.log4jtools.log4j.xml
+ch.ledcom.log4jtools.processor
+ch.ledcom.log4jtools.utils
