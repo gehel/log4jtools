@@ -28,48 +28,48 @@ import com.google.common.collect.ImmutableList;
 
 public class LogFileXMLReader {
 
-	private final Decoder decoder;
+    private final Decoder decoder;
 
-	private final List<LogProcessor> logProcessors;
+    private final List<LogProcessor> logProcessors;
 
-	private static final String HOSTNAME_KEY = "hostname";
-	private static final String APPLICATION_KEY = "application";
+    private static final String HOSTNAME_KEY = "hostname";
+    private static final String APPLICATION_KEY = "application";
 
-	public LogFileXMLReader(List<LogProcessor> logProcessors)
-			throws IOException {
-		this.decoder = new XMLDecoder();
-		this.logProcessors = ImmutableList.copyOf(logProcessors);
-	}
+    public LogFileXMLReader(List<LogProcessor> logProcessors)
+            throws IOException {
+        this.decoder = new XMLDecoder();
+        this.logProcessors = ImmutableList.copyOf(logProcessors);
+    }
 
-	@SuppressWarnings("unchecked")
-	public void process(BufferedReader reader, String host, String path)
-			throws IOException {
-		char[] content = new char[10000];
-		int length = 0;
-		while ((length = reader.read(content)) > -1) {
-			processEvents(
-					decoder.decodeEvents(String.valueOf(content, 0, length)),
-					host, path);
-		}
-	}
+    @SuppressWarnings("unchecked")
+    public void process(BufferedReader reader, String host, String path)
+            throws IOException {
+        char[] content = new char[10000];
+        int length = 0;
+        while ((length = reader.read(content)) > -1) {
+            processEvents(
+                    decoder.decodeEvents(String.valueOf(content, 0, length)),
+                    host, path);
+        }
+    }
 
-	private void processEvents(Collection<LoggingEvent> c, String host,
-			String application) throws IOException {
-		if (c == null) {
-			return;
-		}
-		for (LoggingEvent evt : c) {
-			if (evt.getProperty(HOSTNAME_KEY) == null) {
-				evt.setProperty(HOSTNAME_KEY, host);
-			}
-			if (evt.getProperty(APPLICATION_KEY) == null) {
-				evt.setProperty(APPLICATION_KEY, application);
-			}
+    private void processEvents(Collection<LoggingEvent> c, String host,
+            String application) throws IOException {
+        if (c == null) {
+            return;
+        }
+        for (LoggingEvent evt : c) {
+            if (evt.getProperty(HOSTNAME_KEY) == null) {
+                evt.setProperty(HOSTNAME_KEY, host);
+            }
+            if (evt.getProperty(APPLICATION_KEY) == null) {
+                evt.setProperty(APPLICATION_KEY, application);
+            }
 
-			for (LogProcessor processor : this.logProcessors) {
-				processor.process(evt);
-			}
-		}
-	}
+            for (LogProcessor processor : this.logProcessors) {
+                processor.process(evt);
+            }
+        }
+    }
 
 }

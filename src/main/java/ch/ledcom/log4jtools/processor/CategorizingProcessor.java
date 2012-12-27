@@ -30,56 +30,56 @@ import com.google.common.collect.ImmutableMap;
 
 public class CategorizingProcessor implements LogProcessor {
 
-	private final List<CategorizationFilter> filters;
+    private final List<CategorizationFilter> filters;
 
-	private final Map<String, Appender> appenders;
+    private final Map<String, Appender> appenders;
 
-	private final Map<String, Report> reports = new HashMap<String, Report>();
+    private final Map<String, Report> reports = new HashMap<String, Report>();
 
-	public CategorizingProcessor(List<CategorizationFilter> filters,
-			final Map<String, Appender> appenders) throws IOException {
-		this.filters = filters;
-		this.appenders = appenders;
-	}
+    public CategorizingProcessor(List<CategorizationFilter> filters,
+            final Map<String, Appender> appenders) throws IOException {
+        this.filters = filters;
+        this.appenders = appenders;
+    }
 
-	@Override
-	public void process(LoggingEvent event) throws IOException {
-		for (CategorizationFilter filter : this.filters) {
-			if (filter.match(event)) {
-				processEvent(filter, event, this.reports);
-				break;
-			}
-		}
-	}
+    @Override
+    public void process(LoggingEvent event) throws IOException {
+        for (CategorizationFilter filter : this.filters) {
+            if (filter.match(event)) {
+                processEvent(filter, event, this.reports);
+                break;
+            }
+        }
+    }
 
-	private void processEvent(CategorizationFilter filter, LoggingEvent event,
-			Map<String, Report> reports) throws IOException {
-		// log to the appropriate file
-		Appender appender = getAppender(filter);
-		if (appender != null) {
-			appender.doAppend(event);
-		}
-		getReport(filter, reports).accumulateEvent(event);
-	}
+    private void processEvent(CategorizationFilter filter, LoggingEvent event,
+            Map<String, Report> reports) throws IOException {
+        // log to the appropriate file
+        Appender appender = getAppender(filter);
+        if (appender != null) {
+            appender.doAppend(event);
+        }
+        getReport(filter, reports).accumulateEvent(event);
+    }
 
-	private Appender getAppender(CategorizationFilter filter) {
-		if (Strings.isNullOrEmpty(filter.getCategory())) {
-			return NullAppender.getNullAppender();
-		}
-		return this.appenders.get(filter.getCategory());
-	}
+    private Appender getAppender(CategorizationFilter filter) {
+        if (Strings.isNullOrEmpty(filter.getCategory())) {
+            return NullAppender.getNullAppender();
+        }
+        return this.appenders.get(filter.getCategory());
+    }
 
-	private Report getReport(CategorizationFilter filter,
-			Map<String, Report> reports) {
-		String description = filter.getDescription();
-		if (!reports.containsKey(description)) {
-			reports.put(description, new Report(description));
-		}
-		return reports.get(description);
-	}
+    private Report getReport(CategorizationFilter filter,
+            Map<String, Report> reports) {
+        String description = filter.getDescription();
+        if (!reports.containsKey(description)) {
+            reports.put(description, new Report(description));
+        }
+        return reports.get(description);
+    }
 
-	public Map<String, Report> getReports() {
-		return ImmutableMap.copyOf(this.reports);
-	}
+    public Map<String, Report> getReports() {
+        return ImmutableMap.copyOf(this.reports);
+    }
 
 }

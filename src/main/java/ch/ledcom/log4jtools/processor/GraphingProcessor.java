@@ -33,101 +33,101 @@ import com.google.common.collect.ImmutableList;
 
 public class GraphingProcessor implements LogProcessor {
 
-	private final List<String> categories;
+    private final List<String> categories;
 
-	private final RrdDb rrdDb;
+    private final RrdDb rrdDb;
 
-	private Date firstSample = null;
-	private Date lastSample = null;
-	private Date lastRotation = null;
+    private Date firstSample = null;
+    private Date lastSample = null;
+    private Date lastRotation = null;
 
-	private static final long ROTATION_DELAY = 300 * 1000;
+    private static final long ROTATION_DELAY = 300 * 1000;
 
-	private final Map<String, Integer> consolidation = new HashMap<String, Integer>();
+    private final Map<String, Integer> consolidation = new HashMap<String, Integer>();
 
-	public GraphingProcessor(List<String> categories, String rrdPath)
-			throws IOException {
-		this.categories = ImmutableList.copyOf(categories);
-		this.rrdDb = new RrdDb(createRrdDef(rrdPath));
-	}
+    public GraphingProcessor(List<String> categories, String rrdPath)
+            throws IOException {
+        this.categories = ImmutableList.copyOf(categories);
+        this.rrdDb = new RrdDb(createRrdDef(rrdPath));
+    }
 
-	private RrdDef createRrdDef(String rrdPath) {
-		RrdDef rrdDef = new RrdDef(rrdPath, 300);
-		rrdDef.addArchive(AVERAGE, 0.5, 1, 600);
-		rrdDef.addArchive(MAX, 0.5, 1, 600);
-		for (String category : this.categories) {
-			rrdDef.addDatasource(new DsDef(category, ABSOLUTE, 50, Double.NaN,
-					Double.NaN));
-		}
-		rrdDef.addDatasource(new DsDef("default", ABSOLUTE, 50, Double.NaN,
-				Double.NaN));
-		return rrdDef;
-	}
+    private RrdDef createRrdDef(String rrdPath) {
+        RrdDef rrdDef = new RrdDef(rrdPath, 300);
+        rrdDef.addArchive(AVERAGE, 0.5, 1, 600);
+        rrdDef.addArchive(MAX, 0.5, 1, 600);
+        for (String category : this.categories) {
+            rrdDef.addDatasource(new DsDef(category, ABSOLUTE, 50, Double.NaN,
+                    Double.NaN));
+        }
+        rrdDef.addDatasource(new DsDef("default", ABSOLUTE, 50, Double.NaN,
+                Double.NaN));
+        return rrdDef;
+    }
 
-	@Override
-	public void process(LoggingEvent event) throws IOException {
-		if (this.firstSample == null) {
-			this.firstSample = new Date(event.getTimeStamp());
-			this.lastRotation = this.firstSample;
-			this.lastSample = this.firstSample;
-		}
-		if (this.lastSample.getTime() > event.getTimeStamp()) {
-			return;
-		}
-		if (this.lastRotation.getTime() + ROTATION_DELAY < event.getTimeStamp()) {
-			rotate(new Date(event.getTimeStamp()));
-		}
+    @Override
+    public void process(LoggingEvent event) throws IOException {
+        if (this.firstSample == null) {
+            this.firstSample = new Date(event.getTimeStamp());
+            this.lastRotation = this.firstSample;
+            this.lastSample = this.firstSample;
+        }
+        if (this.lastSample.getTime() > event.getTimeStamp()) {
+            return;
+        }
+        if (this.lastRotation.getTime() + ROTATION_DELAY < event.getTimeStamp()) {
+            rotate(new Date(event.getTimeStamp()));
+        }
 
-		increment(findCategory(event));
-		this.lastSample = new Date(event.getTimeStamp());
-	}
+        increment(findCategory(event));
+        this.lastSample = new Date(event.getTimeStamp());
+    }
 
-	private void increment(String category) {
-		if (!this.consolidation.containsKey(category)) {
-			this.consolidation.put(category, 0);
-		}
-		Integer counter = this.consolidation.get(category);
-		this.consolidation.put(category, counter + 1);
-	}
+    private void increment(String category) {
+        if (!this.consolidation.containsKey(category)) {
+            this.consolidation.put(category, 0);
+        }
+        Integer counter = this.consolidation.get(category);
+        this.consolidation.put(category, counter + 1);
+    }
 
-	private void rotate(Date date) throws IOException {
-		for (String category : categories) {
-			Sample sample = this.rrdDb.createSample();
-			sample.setTime(this.lastRotation.getTime());
-			if (consolidation.containsKey(category)) {
-				sample.setValue(category, consolidation.get(category));
-			} else {
-				sample.setValue(category, 0);
-			}
-			sample.update();
-		}
-		consolidation.clear();
-		this.lastRotation = date;
-	}
+    private void rotate(Date date) throws IOException {
+        for (String category : categories) {
+            Sample sample = this.rrdDb.createSample();
+            sample.setTime(this.lastRotation.getTime());
+            if (consolidation.containsKey(category)) {
+                sample.setValue(category, consolidation.get(category));
+            } else {
+                sample.setValue(category, 0);
+            }
+            sample.update();
+        }
+        consolidation.clear();
+        this.lastRotation = date;
+    }
 
-	private String findCategory(LoggingEvent event) {
-		return findCategory(event.getLoggerName());
-	}
+    private String findCategory(LoggingEvent event) {
+        return findCategory(event.getLoggerName());
+    }
 
-	private String findCategory(String logger) {
-		for (String category : this.categories) {
-			if (logger.startsWith(category)) {
-				return category;
-			}
-		}
-		return "default";
-	}
+    private String findCategory(String logger) {
+        for (String category : this.categories) {
+            if (logger.startsWith(category)) {
+                return category;
+            }
+        }
+        return "default";
+    }
 
-	public Date getFirstSample() {
-		return this.firstSample;
-	}
+    public Date getFirstSample() {
+        return this.firstSample;
+    }
 
-	public Date getLastSample() {
-		return this.lastSample;
-	}
+    public Date getLastSample() {
+        return this.lastSample;
+    }
 
-	public void close() throws IOException {
-		this.rrdDb.close();
-	}
+    public void close() throws IOException {
+        this.rrdDb.close();
+    }
 
 }

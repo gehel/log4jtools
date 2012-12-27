@@ -25,14 +25,14 @@ import com.google.common.collect.ImmutableSet;
 
 public class LoggerSetExtractor implements LogProcessor {
 
-	private final Set<String> loggers = new HashSet<String>();
+    private final Set<String> loggers = new HashSet<String>();
 
-	@Override
-	public void process(LoggingEvent event) throws IOException {
-		this.loggers.add(event.getLoggerName());
-	}
+    @Override
+    public void process(LoggingEvent event) throws IOException {
+        this.loggers.add(event.getLoggerName());
+    }
 
-	public Set<String> getLoggers() {
-		return ImmutableSet.copyOf(this.loggers);
-	}
+    public Set<String> getLoggers() {
+        return ImmutableSet.copyOf(this.loggers);
+    }
 }

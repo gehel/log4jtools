@@ -33,56 +33,56 @@ import com.google.common.collect.ImmutableList;
 
 public class GraphLoggers {
 
-	/**
-	 * Make sure class is never instantiated.
-	 */
-	private GraphLoggers() {
-	}
-	
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-	public static void main(final String[] args) throws IOException {
+    /**
+     * Make sure class is never instantiated.
+     */
+    private GraphLoggers() {
+    }
 
-		List<String> categories = ImmutableList.of("com", "org");
+    /**
+     * @param args
+     * @throws IOException
+     */
+    public static void main(final String[] args) throws IOException {
 
-		File logFile = new File("/home/glederre/logs/problems.xml");
-		LoggerSetExtractor loggerSetProcessor = new LoggerSetExtractor();
-		GraphingProcessor graphingProcessor = new GraphingProcessor(categories,
-				"/home/glederre/logs/rrd/test");
+        List<String> categories = ImmutableList.of("com", "org");
 
-		List<LogProcessor> processors = new ArrayList<LogProcessor>();
-		processors.add(loggerSetProcessor);
-		processors.add(graphingProcessor);
+        File logFile = new File("/home/glederre/logs/problems.xml");
+        LoggerSetExtractor loggerSetProcessor = new LoggerSetExtractor();
+        GraphingProcessor graphingProcessor = new GraphingProcessor(categories,
+                "/home/glederre/logs/rrd/test");
 
-		LogFileXMLReader reader = new LogFileXMLReader(processors);
+        List<LogProcessor> processors = new ArrayList<LogProcessor>();
+        processors.add(loggerSetProcessor);
+        processors.add(graphingProcessor);
 
-		reader.process(new BufferedReader(new FileReader(logFile)), "hqhcecom",
-				"prod");
+        LogFileXMLReader reader = new LogFileXMLReader(processors);
 
-		graphingProcessor.close();
+        reader.process(new BufferedReader(new FileReader(logFile)), "hqhcecom",
+                "prod");
 
-		Set<String> loggers = loggerSetProcessor.getLoggers();
-		for (String logger : loggers) {
-			System.out.println(logger);
-		}
+        graphingProcessor.close();
 
-		RrdGraphDef gDef = new RrdGraphDef();
-		gDef.setWidth(500);
-		gDef.setHeight(300);
-		gDef.setFilename("/home/glederre/logs/test.png");
-		gDef.setStartTime(graphingProcessor.getFirstSample().getTime());
-		gDef.setEndTime(graphingProcessor.getLastSample().getTime());
-		gDef.setTitle("My Title");
-		gDef.setVerticalLabel("occ");
+        Set<String> loggers = loggerSetProcessor.getLoggers();
+        for (String logger : loggers) {
+            System.out.println(logger);
+        }
 
-		for (String category : categories) {
-			gDef.datasource("occ", "/home/glederre/logs/rrd/test", category,
-					AVERAGE);
-		}
-		gDef.hrule(2568, Color.GREEN, "hrule");
-		gDef.setImageFormat("png");
-		RrdGraph graph = new RrdGraph(gDef);
-	}
+        RrdGraphDef gDef = new RrdGraphDef();
+        gDef.setWidth(500);
+        gDef.setHeight(300);
+        gDef.setFilename("/home/glederre/logs/test.png");
+        gDef.setStartTime(graphingProcessor.getFirstSample().getTime());
+        gDef.setEndTime(graphingProcessor.getLastSample().getTime());
+        gDef.setTitle("My Title");
+        gDef.setVerticalLabel("occ");
+
+        for (String category : categories) {
+            gDef.datasource("occ", "/home/glederre/logs/rrd/test", category,
+                    AVERAGE);
+        }
+        gDef.hrule(2568, Color.GREEN, "hrule");
+        gDef.setImageFormat("png");
+        RrdGraph graph = new RrdGraph(gDef);
+    }
 }
