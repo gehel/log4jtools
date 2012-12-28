@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2012-12-28T00:14:16.115">
+<pmd version="4.3" timestamp="2012-12-28T01:05:58.821">
+<file name="/scratch/jenkins/workspace/log4jtools-deploy/src/main/java/ch/ledcom/log4jtools/GraphLoggers.java">
+<violation beginline="86" endline="86" begincolumn="18" endcolumn="22" rule="UnusedLocalVariable" ruleset="Unused Code Rules" package="ch.ledcom.log4jtools" class="GraphLoggers" method="main" variable="graph" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedLocalVariable" priority="3">
+Avoid unused local variables such as 'graph'.
+</violation>
+</file>
 </pmd>
